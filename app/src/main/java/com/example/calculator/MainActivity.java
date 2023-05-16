@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         solutionTv.setText(dataToCalculate);
+        String finalResult=getResult(dataToCalculate);
+        if(!finalResult.equals("Err")){
+            resultTv.setText(finalResult);
+        }
 
     }
     String getResult(String data){
