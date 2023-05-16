@@ -76,19 +76,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         solutionTv.setText(dataToCalculate);
-        String finalResult=getResult(dataToCalculate);
+        String finalResult = getResult(dataToCalculate);
         if(!finalResult.equals("Err")){
             resultTv.setText(finalResult);
         }
 
     }
     String getResult(String data){
-        try {
-            Context context=Context.enter();
+        try{
+            Context context = Context.enter();
             context.setOptimizationLevel(-1);
-            Scriptable scriptable=context.initStandardObjects();
-           String finalResult=context.evaluateString(scriptable,data,"Javascript",1,null).toString();
-         return finalResult;
+            Scriptable scriptable = context.initStandardObjects();
+           String finalResult = context.evaluateString(scriptable,data,"Javascript",1,null).toString();
+           if(finalResult.endsWith(".0")){
+               finalResult = finalResult.replace(".0","");
+           }
+            return finalResult;
         }catch (Exception e){
             return "Err";
         }
